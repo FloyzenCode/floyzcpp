@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <chrono>
+#include <thread>
 
 namespace fcpp
 {
@@ -24,7 +26,8 @@ namespace fcpp
             "floyzcpp create <type> <name>",
             "<type> arguments:",
             "default",
-            "library"};
+            "library",
+        };
 
         for (const std::string &element : helpMessage)
             std::cout << element << '\n';
@@ -44,14 +47,37 @@ namespace fcpp
     // default config
     int createDefault()
     {
-        std::cout << "Default();\n";
+        std::string projectName;
+        std::cout << "project name: ";
+        std::getline(std::cin, projectName);
+
+        std::cout << "Create " << projectName << " project" << std::endl
+                  << "Wait second...";
+
+        system(("mkdir " + projectName).c_str()); // create project folder
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::cout << "\nFolder - done!\n";
+
+        system(("cd " + projectName).c_str());
+        system(("echo \"SSS\" >> ads.txt"));
         return 0;
     }
 
     // library config
     int createLibrary()
     {
-        std::cout << "Lib();\n";
+        std::string projectName;
+        std::cout << "project name: ";
+        std::getline(std::cin, projectName);
+
+        std::cout << "Create " << projectName << " project" << std::endl
+                  << "Wait second...";
+
+        system(("mkdir " + projectName).c_str());
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::cout << "\nFolder - done!\n";
         return 0;
     }
 
@@ -59,8 +85,9 @@ namespace fcpp
     void logicCLI()
     {
         int use_config;
-        std::cout << "Use config: 1) default\n2) library\n Set number: ";
+        std::cout << "Use config:\n 1) default\n2) library\nSet number: ";
         std::cin >> use_config;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the newline character left in the input buffer
 
         if (use_config == 1)
         {
@@ -76,14 +103,12 @@ namespace fcpp
         }
     }
 
-
     // Start function
     void startCLI(int argc, char *argv[])
     {
         if (argc > 1 && std::string(argv[1]) == "create")
         {
-            std::string start_msg = "Start floyzcpp generating projects";
-            std::cout << start_msg << std::endl;
+            std::cout << "Start floyzcpp generating projects" << std::endl;
             fcpp::logicCLI();
         }
         else if (argc == 1)
