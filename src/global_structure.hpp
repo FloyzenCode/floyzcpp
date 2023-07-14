@@ -9,9 +9,7 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <array>
-#include "../src/generating_logic.hpp"
 
 namespace fcpp
 {
@@ -19,16 +17,16 @@ namespace fcpp
         help function
         CLI arguments: floyzcpp, floyzcpp --help, floyzcpp -h
     */
-    void help() {
+    void help()
+    {
         std::array<std::string, 5> helpMessage = {
             "\nfloyzcpp commands help:\n_________________________",
             "floyzcpp create <type> <name>",
             "<type> arguments:",
             "default",
-            "library"
-        };
-        
-        for(const std::string &element : helpMessage) 
+            "library"};
+
+        for (const std::string &element : helpMessage)
             std::cout << element << '\n';
     }
     // errors functions
@@ -43,7 +41,42 @@ namespace fcpp
         fcpp::help();
     }
 
-    
+    // default config
+    int createDefault()
+    {
+        std::cout << "Default();\n";
+        return 0;
+    }
+
+    // library config
+    int createLibrary()
+    {
+        std::cout << "Lib();\n";
+        return 0;
+    }
+
+    // Logic this Command Line Interface floyzcpp
+    void logicCLI()
+    {
+        int use_config;
+        std::cout << "Use config: 1) default\n2) library\n Set number: ";
+        std::cin >> use_config;
+
+        if (use_config == 1)
+        {
+            fcpp::createDefault();
+        }
+        else if (use_config == 2)
+        {
+            fcpp::createLibrary();
+        }
+        else
+        {
+            fcpp::error();
+        }
+    }
+
+
     // Start function
     void startCLI(int argc, char *argv[])
     {
@@ -56,7 +89,9 @@ namespace fcpp
         else if (argc == 1)
         {
             fcpp::help();
-        } else {
+        }
+        else
+        {
             fcpp::errorSyntax();
         }
     }
@@ -69,7 +104,4 @@ namespace fcpp
 
     floyzcpp create default project1
         logicCLI return 0; - Succesfull
-
-    
-
 */
