@@ -80,4 +80,8 @@
 |---- examples
 |     |
 |     |-- examples use library
+|
+|---- CMakeLists.txt
+|
+|---- README.md
 ```
