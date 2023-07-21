@@ -15,7 +15,7 @@ The CLI tool will generate the project based on the provided specifications and 
 ## Supported Compilers
 The CLI tool supports the following compilers:
 - MSVC
-- G++
+- g++
 - clang++
 ---
 ### Requirements
