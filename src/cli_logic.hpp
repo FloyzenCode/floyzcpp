@@ -17,10 +17,6 @@
 
 namespace fcpp
 {
-    /*
-        help function
-        CLI arguments: floyzcpp, floyzcpp --help, floyzcpp -h
-    */
     void help(const std::string errMesssage)
     {
         std::array<std::string, 6> helpMessage = {
@@ -235,11 +231,11 @@ namespace fcpp
             std::cout << "Start floyzcpp generating projects" << std::endl;
             fcpp::logicCLI();
         }
-        else if ((argc > 1 && std::string(argv[1]) == "create default"))
+        else if ((argc > 2 && std::string(argv[1]) == "create") && std::string(argv[2]) == "default")
         {
             fcpp::createDefault();
         }
-        else if ((argc > 1 && std::string(argv[1]) == "create library"))
+        else if ((argc > 2 && std::string(argv[1]) == "create") && std::string(argv[2]) == "library")
         {
             fcpp::createDefault();
         }
@@ -254,18 +250,3 @@ namespace fcpp
         }
     }
 }
-
-/*
-    floyzcpp afd
-        Error syntax command - False
-        help()
-
-    floyzcpp create default project1
-        logicCLI return 0; - Succesfull
-*/
-
-/*
-    floyzcpp help:
-    floyzcpp create default - create default structure project
-    floyzcpp create library - create library structure project
-*/
