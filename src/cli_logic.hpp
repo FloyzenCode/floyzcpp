@@ -21,29 +21,48 @@ namespace fcpp
         help function
         CLI arguments: floyzcpp, floyzcpp --help, floyzcpp -h
     */
+    void help(const std::string errMesssage)
+    {
+        std::array<std::string, 6> helpMessage = {
+            "|---------------------------------------------------------------|",
+            "| 💡 floyzcpp help:                                             |",
+            "|---------------------------------------------------------------|",
+            "| 🟢 floyzcpp create default - create default structure project |",
+            "| 🟢 floyzcpp create library - create library structure project |",
+            "|---------------------------------------------------------------|",
+        };
+
+        std::cout << "🔴 " << errMesssage << " failed" << std::endl;
+
+        for (const std::string &element : helpMessage)
+            std::cout << element << '\n';
+    }
+
     void help()
     {
-        std::array<std::string, 5> helpMessage = {
-            "\nfloyzcpp commands help:\n_________________________",
-            "floyzcpp create <type> <name>",
-            "<type> arguments:",
-            "default",
-            "library",
+        std::array<std::string, 6> helpMessage = {
+            "|---------------------------------------------------------------|",
+            "| 💡 floyzcpp help:                                             |",
+            "|---------------------------------------------------------------|",
+            "| 🟢 floyzcpp create default - create default structure project |",
+            "| 🟢 floyzcpp create library - create library structure project |",
+            "|---------------------------------------------------------------|",
         };
 
         for (const std::string &element : helpMessage)
             std::cout << element << '\n';
     }
+
     // errors functions
     void error()
     {
         std::cout << "Unknow error\n";
     }
 
-    void errorSyntax()
+    void errorSyntax(std::string errMessage)
     {
         std::cout << "Error syntax command\n";
-        fcpp::help();
+        fcpp::help(errMessage);
     }
 
     bool hasSpaces(const std::string &str)
@@ -216,13 +235,22 @@ namespace fcpp
             std::cout << "Start floyzcpp generating projects" << std::endl;
             fcpp::logicCLI();
         }
+        else if ((argc > 1 && std::string(argv[1]) == "create default"))
+        {
+            fcpp::createDefault();
+        }
+        else if ((argc > 1 && std::string(argv[1]) == "create library"))
+        {
+            fcpp::createDefault();
+        }
+
         else if (argc == 1)
         {
             fcpp::help();
         }
         else
         {
-            fcpp::errorSyntax();
+            fcpp::errorSyntax(std::string(argv[1]));
         }
     }
 }
@@ -234,4 +262,10 @@ namespace fcpp
 
     floyzcpp create default project1
         logicCLI return 0; - Succesfull
+*/
+
+/*
+    floyzcpp help:
+    floyzcpp create default - create default structure project
+    floyzcpp create library - create library structure project
 */
